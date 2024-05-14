@@ -1,7 +1,6 @@
 package src.main;
 
 import src.eventos.Evento;
-import src.teatro.Teatro;
 import java.util.Scanner;
 
 public class Main {
@@ -9,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        Teatro teatro = new Teatro();
+        Evento evento = new Evento();
 
         int opcao = 0;
         while (opcao != 4) {
@@ -26,13 +25,13 @@ public class Main {
             opcao = scanner.nextInt();
             switch (opcao) {
                 case 1:
-                    teatro.exibeEventos();
+                    evento.exibeEventos();
                     break;
                 case 2:
-                    teatro.addEvento();
+                    evento.addEvento();
                     break;
                 case 3:
-                    teatro.deletaEvento();
+                    evento.deletaEvento();
                     break;
                 case 4:
                     System.out.println("Saindo...");
