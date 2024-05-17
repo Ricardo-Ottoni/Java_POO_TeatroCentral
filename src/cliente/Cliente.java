@@ -35,7 +35,7 @@ public class Cliente {
         Cliente novoCliente = new Cliente(nome, cpf, tel);
         clientes.add(novoCliente);
         contadorClientes++;
-        System.out.println("Cadastro criado");
+        System.out.println("Cadastro criado\n");
     }
 
     //método para exibir clientes cadastrados - utilizar em relatorio

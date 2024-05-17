@@ -37,4 +37,6 @@ public class Funcionario {
     public void setMatricula(int matricula) {
         this.matricula = matricula;
     }
+
+    //criar metodo para add e remover funcionarios
 }

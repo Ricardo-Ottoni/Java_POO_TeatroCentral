@@ -2,8 +2,11 @@ package src.main;
 
 import src.cliente.Cliente;
 import src.eventos.Evento;
+import src.ingressos.Fila;
+import src.ingressos.Reserva;
 import src.ingressos.Ingresso;
 import src.teatro.Poltrona;
+
 
 import java.util.Scanner;
 
@@ -12,10 +15,12 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        Evento evento = new Evento();
         Cliente cliente = new Cliente();
+        Evento evento = new Evento();
         Poltrona poltrona = new Poltrona();
-        Ingresso ingresso = new Ingresso();
+        Ingresso ingresso = new Ingresso(cliente);
+        Reserva reserva = new Reserva();
+        Fila fila = new Fila();
 
         int opcao = 0;
         while (opcao != 10) {
@@ -51,7 +56,7 @@ public class Main {
             } else if (opcao == 5) {
                 ingresso.vendaIngresso();
             } else if (opcao == 6) {
-                //poltrona.verificaPoltrona();
+                poltrona.escolhePoltrona();
             } else if (opcao == 7) {
                 //reserva.verificaReserva();
             } else if (opcao == 8) {
@@ -65,6 +70,4 @@ public class Main {
             }
         }
     }
-
-
 }

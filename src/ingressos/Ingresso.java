@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class Ingresso {
     //atributos
+    private static int contadorIngressos = 0;
     private int numeroIngresso;
     private Poltrona poltrona;
     private Cliente cliente;
@@ -16,12 +17,12 @@ public class Ingresso {
     private ArrayList<Ingresso> ingressos;  //criando lista de Ingresso ao Main
 
     //método construtor
-    public Ingresso() {
-        ingressos = new ArrayList<>();   //inicia lista
+    public Ingresso(Cliente cliente) {
+        this.cliente = cliente;
+        this.ingressos = new ArrayList<>();
     }
-    public Ingresso(int numeroIngresso, Poltrona poltrona,
-                    Cliente cliente, Evento evento) {
-        this.numeroIngresso = numeroIngresso;
+    public Ingresso(Poltrona poltrona, Cliente cliente, Evento evento) {
+        this.numeroIngresso = contadorIngressos++;
         this.poltrona = poltrona;
         this.cliente = cliente;
         this.evento = evento;
@@ -30,7 +31,7 @@ public class Ingresso {
     //método para venda de ingressos
     public void vendaIngresso() {
         Scanner scanner = new Scanner(System.in);
-        char escolha = ' ';
+        char escolha;
         Evento evento = new Evento();
 
 
@@ -45,28 +46,50 @@ public class Ingresso {
                 Cliente clienteEncontrado = null;
                 for (Cliente c : cliente.getClientes()) {           //lembrar q aqui eu busco o cliente
                     if (c.getNome().equalsIgnoreCase(nomeCliente)) {
-                        clienteEncontrado =c;
+                        clienteEncontrado = c;
                         break;
                     }
                 }
 
                 if (clienteEncontrado != null) {     // lembrar q aqui eu verifico se o cliente foi encontrado
                     System.out.println("Cliente encontrado:");      //entao eu continuo com a venda
-
-                    System.out.println("Informe o evento desejado:");
+                    System.out.println("Evento(s):");
                     evento.exibeEventos();
-                    ArrayList<Evento> eventos = evento.getEventos();
-                    System.out.println("Poltronas disponiveis: ");
-                    poltrona.escolhePoltrona();
-                    //continuar...
-                } else {
-                    System.out.println("Cliente não encontrado.");
-                }
 
+                    System.out.println("\nDigite o nome do evento:");
+                    String nomeEvento = scanner.nextLine();
+                    Evento eventoEncontrado = null;
+                    for (Evento ev : evento.getEventos()) {
+                        if (ev.getNome().equalsIgnoreCase(nomeEvento)) {
+                            eventoEncontrado = ev;
+                            break;
+                        }
+                    }
+
+                    if (eventoEncontrado != null) {
+                        System.out.println("Poltronas disponiveis: ");
+                        poltrona.escolhePoltrona();                 //chamando método para escolher poltrona
+
+                        Ingresso ingresso = new Ingresso (poltrona, clienteEncontrado, eventoEncontrado);
+                        ingressos.add(ingresso);
+
+                        System.out.println("Ingresso comprado com sucesso!");
+                        System.out.println("Número do ingresso: " + ingresso.getNumeroIngresso());
+                        System.out.println("Detalhes do ingresso: ");
+                        System.out.println("Cliente: " + clienteEncontrado.getNome());
+                        System.out.println("Evento: " + eventoEncontrado.getNome());
+                        System.out.println("Poltrona: " + poltrona.toString());
+                    } else {
+                        System.out.println("Evento não encontrado.");
+                    }
+
+                } else {
+                    System.out.println("Cliente não encontrado.\n");
+                }
             } else if (escolha == 'N') {
                 cliente.cadastroCliente();
             } else {
-                System.out.println("Opçao invalida. Digite 'S' para Sim ou 'N' para Nao.");
+                System.out.println("Opção invalida. Digite 'S' para Sim ou 'N' para Não.");
             }
         }
     }
@@ -74,9 +97,6 @@ public class Ingresso {
     //método de acesso get/set
     public int getNumeroIngresso() {
         return numeroIngresso;
-    }
-    public void setNumeroIngresso(int numeroIngresso) {
-        this.numeroIngresso = numeroIngresso;
     }
 
     public Poltrona getPoltrona() {
@@ -100,10 +120,11 @@ public class Ingresso {
         this.evento = evento;
     }
 
-    public ArrayList<Ingresso> getIngressos() {
+    public ArrayList<Ingresso>getIngressos() {
         return ingressos;
     }
     public void addIngressos(Ingresso ingresso) {
         this.ingressos.add(ingresso);
     }
 }
+
