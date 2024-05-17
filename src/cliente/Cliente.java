@@ -38,6 +38,19 @@ public class Cliente {
         System.out.println("Cadastro criado");
     }
 
+    //método para exibir clientes cadastrados - utilizar em relatorio
+    public void exibeClientes() {
+        for (Cliente cliente : clientes) {              //aqui eu percorro a lista de clientes
+            System.out.println();
+            System.out.println(cliente);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Nome: " + nome + ", CPF: " + cpf + ", Telefone: " + tel;
+    }
+
     public String getNome() {
         return nome;
     }

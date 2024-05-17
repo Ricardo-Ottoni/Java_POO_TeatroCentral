@@ -3,6 +3,7 @@ package src.main;
 import src.cliente.Cliente;
 import src.eventos.Evento;
 import src.ingressos.Ingresso;
+import src.teatro.Poltrona;
 
 import java.util.Scanner;
 
@@ -13,6 +14,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Evento evento = new Evento();
         Cliente cliente = new Cliente();
+        Poltrona poltrona = new Poltrona();
         Ingresso ingresso = new Ingresso();
 
         int opcao = 0;

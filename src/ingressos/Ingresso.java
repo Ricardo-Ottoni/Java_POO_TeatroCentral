@@ -6,13 +6,8 @@ import src.eventos.Evento;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-//import src.reserva.Reserva;
-//import src.fila.Fila;
 
-//importar classes: cliente, setor e poltrona
-
-public class
-Ingresso {
+public class Ingresso {
     //atributos
     private int numeroIngresso;
     private Poltrona poltrona;
@@ -34,51 +29,46 @@ Ingresso {
 
     //método para venda de ingressos
     public void vendaIngresso() {
-
         Scanner scanner = new Scanner(System.in);
-
-        Cliente cliente = new Cliente();
+        char escolha = ' ';
         Evento evento = new Evento();
 
-        System.out.println("Possui cadastro?");    //chamar e verificar classe Cliente
-        int escolha = 0;
-        while (escolha != 2){
-            System.out.println(" (S)im");
-            System.out.println(" (N)ao");
 
-            escolha = Integer.parseInt(scanner.nextLine());
-            if (escolha == 'S' || escolha == 's'){
+        while (true) {
+            System.out.println("Possui cadastro? (S/N)");    //chamar e verificar classe Cliente
+            escolha = Character.toUpperCase(scanner.nextLine().charAt(0));
+
+            if (escolha == 'S') {
                 System.out.println("Informe o nome: ");
                 String nomeCliente = scanner.nextLine();
 
-                Cliente clienteEcontrado = null;        //lembrar q aqui eu busco o cliente
-                for (Cliente c : cliente.getCliente()) {
+                Cliente clienteEncontrado = null;
+                for (Cliente c : cliente.getClientes()) {           //lembrar q aqui eu busco o cliente
                     if (c.getNome().equalsIgnoreCase(nomeCliente)) {
-                        clienteEcontrado = c;
+                        clienteEncontrado =c;
                         break;
                     }
                 }
 
-                if (clienteEcontrado != null) {     // lembrar q aqui eu verifico se o cliente foi encontrado
+                if (clienteEncontrado != null) {     // lembrar q aqui eu verifico se o cliente foi encontrado
+                    System.out.println("Cliente encontrado:");      //entao eu continuo com a venda
 
-                    System.out.println("Cliente encontrado:");
-                    System.out.println("Nome: " + clienteEncontrado.getNome());
-                    System.out.println("CPF: " + clienteEncontrado.getCpf());
-                    System.out.println("Telefone: " + clienteEncontrado.getTelefone());
-
-                    // Solicita o evento ao usuário
                     System.out.println("Informe o evento desejado:");
                     evento.exibeEventos();
                     ArrayList<Evento> eventos = evento.getEventos();
                     System.out.println("Poltronas disponiveis: ");
                     poltrona.escolhePoltrona();
                     //continuar...
+                } else {
+                    System.out.println("Cliente não encontrado.");
                 }
-            }
 
-            } else if (escolha == 'N' || escolha == 'n'){
+            } else if (escolha == 'N') {
                 cliente.cadastroCliente();
+            } else {
+                System.out.println("Opçao invalida. Digite 'S' para Sim ou 'N' para Nao.");
             }
+        }
     }
 
     //método de acesso get/set
