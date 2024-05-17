@@ -1,26 +1,41 @@
 package src.cliente;
 
-import src.ingressos.Ingresso;
-
 import java.util.ArrayList;
-
+import java.util.Scanner;
 
 public class Cliente {
     //atributos
     private String nome;
     private String cpf;
     private String tel;
-    private ArrayList<Ingresso> ingressos;
+    private static int contadorClientes = 0;
+    private ArrayList<Cliente> clientes;
 
     //método construtor
     public Cliente() {
-        this.ingressos = new ArrayList<>();
+        this.clientes = new ArrayList<>();
     }
     public Cliente(String nome, String cpf, String tel) {
         this.nome = nome;
         this.cpf = cpf;
         this.tel = tel;
-        this.ingressos = new ArrayList<>();
+        this.clientes = new ArrayList<>();
+    }
+
+    //método para criar cadastro de cliente
+    public void cadastroCliente() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Informe o nome:");
+        String nome = scanner.nextLine();
+        System.out.println("Informe o cpf: ");
+        String cpf = scanner.nextLine();
+        System.out.println("Informe o telefone: ");
+        String telefone = scanner.nextLine();
+
+        Cliente novoCliente = new Cliente(nome, cpf, tel);
+        clientes.add(novoCliente);
+        contadorClientes++;
+        System.out.println("Cadastro criado");
     }
 
     public String getNome() {
@@ -44,10 +59,10 @@ public class Cliente {
         this.tel = tel;
     }
 
-    public ArrayList<Ingresso> getIngressos() {
-        return ingressos;
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
     }
-    public void addIngresso(Ingresso ingresso) {
-        this.ingressos.add(ingresso);
+    public void addCliente(Cliente cliente) {
+        this.clientes.add(cliente);
     }
 }

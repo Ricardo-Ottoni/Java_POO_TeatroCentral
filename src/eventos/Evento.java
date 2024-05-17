@@ -24,7 +24,6 @@ public class Evento {
         this.horario = horario;
         this.descricao = descricao;
         this.precoIngresso = precoIngresso;
-        int capacidadeTotal = 1751;   //sendo 77 cadeiras cativas
     }
 
     //método para adicionar evento
@@ -40,6 +39,7 @@ public class Evento {
         String descricao = scanner.nextLine();
         System.out.println("Informe o preço do ingresso:");
         double precoIngresso = scanner.nextDouble();
+        System.out.println("Evento adicionado!");
 
         Evento novoEvento = new Evento(nome, data, horario, descricao, precoIngresso);
         eventos.add(novoEvento);
@@ -47,7 +47,7 @@ public class Evento {
 
     //método para exibir os eventos cadastrados
     public void exibeEventos() {
-        for(Evento evento : eventos){            //lembrar: aqui percorre a lista de eventos
+        for(Evento evento : eventos){            //lembrar que aqui percorre a lista de eventos
             System.out.println();
             System.out.println(evento);
         }
@@ -56,14 +56,30 @@ public class Evento {
     //método para remover evento
     public void deletaEvento() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Informe o nome do evento que deseja remover:");
-        String nomeEvento = scanner.nextLine();
-        eventos.removeIf(evento -> evento.getNome().equals(nomeEvento));
+        boolean eventoRemovido = false;
+
+        while (!eventoRemovido) {
+            System.out.println("Informe o nome do evento que deseja remover:");
+            String nomeEvento = scanner.nextLine();
+
+            for (Evento evento : eventos) {
+                if (evento.getNome().equals(nomeEvento)) {
+                    eventos.remove(evento);
+                    eventoRemovido = true;
+                    System.out.println("Evento removido!");
+                    break;
+                }
+            }
+            if (!eventoRemovido) {
+                System.out.println("Evento nao encontrado.");
+                System.out.println();
+            }
+        }
     }
 
     //método para exibir informaçoes do evento
     @Override
-    public String toString(){
+    public String toString() {
         return " Nome: " + nome + "\n Data: " + data + "\n Horário: " + horario + "h" +
                 "\n Descrição: " + descricao + "\n Preço do Ingresso: R$ " + precoIngresso;
     }
@@ -102,5 +118,12 @@ public class Evento {
     }
     public void setPrecoIngresso(double precoIngresso) {
         this.precoIngresso = precoIngresso;
+    }
+
+    public ArrayList<Evento> getEventos() {
+        return eventos;
+    }
+    public void addEventos(Evento eventos) {
+        this.eventos.add(eventos);
     }
 }

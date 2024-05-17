@@ -1,4 +1,4 @@
-package src.vendas;
+package src.ingressos;
 
 public class Cliente {
 

@@ -3,6 +3,9 @@ package src.ingressos;
 import src.teatro.Poltrona;
 import src.cliente.Cliente;
 import src.eventos.Evento;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 //import src.reserva.Reserva;
 //import src.fila.Fila;
 
@@ -12,41 +15,78 @@ public class
 Ingresso {
     //atributos
     private int numeroIngresso;
-    private double precoIngresso;
     private Poltrona poltrona;
     private Cliente cliente;
     private Evento evento;
-    private Reserva reserva;
-    private Fila fila;
+    private ArrayList<Ingresso> ingressos;  //criando lista de Ingresso ao Main
 
     //método construtor
     public Ingresso() {
+        ingressos = new ArrayList<>();   //inicia lista
     }
-    public Ingresso(int numeroIngresso, double precoIngresso, Poltrona poltrona,
-                    Cliente cliente, Evento evento, Reserva reserva, Fila fila) {
+    public Ingresso(int numeroIngresso, Poltrona poltrona,
+                    Cliente cliente, Evento evento) {
         this.numeroIngresso = numeroIngresso;
-        this.precoIngresso = precoIngresso;
         this.poltrona = poltrona;
         this.cliente = cliente;
         this.evento = evento;
-        this.reserva = reserva;
-        this.fila = fila;
+    }
+
+    //método para venda de ingressos
+    public void vendaIngresso() {
+
+        Scanner scanner = new Scanner(System.in);
+
+        Cliente cliente = new Cliente();
+        Evento evento = new Evento();
+
+        System.out.println("Possui cadastro?");    //chamar e verificar classe Cliente
+        int escolha = 0;
+        while (escolha != 2){
+            System.out.println(" (S)im");
+            System.out.println(" (N)ao");
+
+            escolha = Integer.parseInt(scanner.nextLine());
+            if (escolha == 'S' || escolha == 's'){
+                System.out.println("Informe o nome: ");
+                String nomeCliente = scanner.nextLine();
+
+                Cliente clienteEcontrado = null;        //lembrar q aqui eu busco o cliente
+                for (Cliente c : cliente.getCliente()) {
+                    if (c.getNome().equalsIgnoreCase(nomeCliente)) {
+                        clienteEcontrado = c;
+                        break;
+                    }
+                }
+
+                if (clienteEcontrado != null) {     // lembrar q aqui eu verifico se o cliente foi encontrado
+
+                    System.out.println("Cliente encontrado:");
+                    System.out.println("Nome: " + clienteEncontrado.getNome());
+                    System.out.println("CPF: " + clienteEncontrado.getCpf());
+                    System.out.println("Telefone: " + clienteEncontrado.getTelefone());
+
+                    // Solicita o evento ao usuário
+                    System.out.println("Informe o evento desejado:");
+                    evento.exibeEventos();
+                    ArrayList<Evento> eventos = evento.getEventos();
+                    System.out.println("Poltronas disponiveis: ");
+                    poltrona.escolhePoltrona();
+                    //continuar...
+                }
+            }
+
+            } else if (escolha == 'N' || escolha == 'n'){
+                cliente.cadastroCliente();
+            }
     }
 
     //método de acesso get/set
-
     public int getNumeroIngresso() {
         return numeroIngresso;
     }
     public void setNumeroIngresso(int numeroIngresso) {
         this.numeroIngresso = numeroIngresso;
-    }
-
-    public double getPrecoIngresso() {
-        return precoIngresso;
-    }
-    public void setPrecoIngresso(double precoIngresso) {
-        this.precoIngresso = precoIngresso;
     }
 
     public Poltrona getPoltrona() {
@@ -70,17 +110,10 @@ Ingresso {
         this.evento = evento;
     }
 
-    public Reserva getReserva() {
-        return reserva;
+    public ArrayList<Ingresso> getIngressos() {
+        return ingressos;
     }
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
-    }
-
-    public Fila getFila() {
-        return fila;
-    }
-    public void setFila(Fila fila) {
-        this.fila = fila;
+    public void addIngressos(Ingresso ingresso) {
+        this.ingressos.add(ingresso);
     }
 }
