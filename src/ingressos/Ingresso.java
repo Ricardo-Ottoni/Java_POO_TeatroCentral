@@ -36,6 +36,7 @@ public class Ingresso {
         Scanner scanner = new Scanner(System.in);
         char escolha;
         Evento evento = new Evento();
+        Poltrona poltronaEscolhida = null;
 
         while (true) {
             System.out.println("Possui cadastro? (S/N)");
@@ -70,27 +71,24 @@ public class Ingresso {
 
                     if (eventoEncontrado != null) {
                         System.out.println("Poltronas disponíveis:");
-                        Poltrona poltronaEscolhida = escolhePoltrona();
+                        poltronaEscolhida = escolhePoltrona();
 
-                        if (poltronaEscolhida != null) {
-                            Ingresso ingresso = new Ingresso(poltronaEscolhida, clienteEncontrado, eventoEncontrado);
-                            ingressos.add(ingresso);
+                        Ingresso ingresso = new Ingresso(poltronaEscolhida, clienteEncontrado, eventoEncontrado);
+                        ingressos.add(ingresso);
 
-                            System.out.println("Ingresso comprado com sucesso!");
-                            System.out.println("Número do ingresso: " + ingresso.getNumeroIngresso());
-                            System.out.println("Detalhes do ingresso:");
-                            System.out.println("Cliente: " + clienteEncontrado.getNome());
-                            System.out.println("Evento: " + eventoEncontrado.getNome());
-                            System.out.println("Poltrona: " + poltronaEscolhida.getNumero());
-                            break; // Sair do loop após finalizar a venda
-                        } else {
-                            System.out.println("Venda cancelada.");
-                            break; // Sair do loop se a venda for cancelada
-                        }
+                        int formaPagamento = formaPagamento(); // Captura a forma de pagamento
+                        System.out.println("Ingresso comprado com sucesso!");
+                        System.out.println("Número do ingresso: " + ingresso.getNumeroIngresso());
+                        System.out.println("Detalhes do ingresso:");
+                        System.out.println("Cliente: " + clienteEncontrado.getNome());
+                        System.out.println("Evento: " + eventoEncontrado.getNome());
+                        System.out.println("Poltrona: " + poltronaEscolhida.getNumero());
+                        System.out.println("Pagamento: " + formaPagamento); // Imprime a forma de pagamento
+                        break; // Sair do loop após finalizar a venda
                     } else {
-                        System.out.println("Evento não encontrado.");
+                        System.out.println("Venda cancelada.");
+                        break; // Sair do loop se a venda for cancelada
                     }
-
                 } else {
                     System.out.println("Cliente não encontrado.\n");
                 }
@@ -137,5 +135,37 @@ public class Ingresso {
 
     public void addIngressos(Ingresso ingresso) {
         this.ingressos.add(ingresso);
+    }
+
+    public int formaPagamento() {
+        Scanner scanner = new Scanner(System.in);
+
+        int pg = 0;
+        while (pg != 4) {
+            System.out.println("--------Menu Pagamento--------");
+            System.out.println(" Escolha a forma de pagamento:");
+            System.out.println(" 1. Dinheiro -----------------");
+            System.out.println(" 2. PIX ----------------------");
+            System.out.println(" 3. Debito -------------------");
+            System.out.println(" 4. Credito ------------------");
+            System.out.println("------------------------------");
+
+            pg = scanner.nextInt();
+            scanner.nextLine();
+            if (pg == -1) {
+                System.out.println("Saindo do menu pagamento...");
+            } else if (pg == 1) {
+                System.out.println("Forma de pagamento: Dinheiro");
+            } else if (pg == 2) {
+                System.out.println("Forma de pagamento: PIX");
+            } else if (pg == 3) {
+                System.out.println("Forma de pagamento: Debito");
+            } else if (pg == 4) {
+                System.out.println("Forma de pagamento: Credito");
+            } else {
+                System.out.println("Opção inválida, tente novamente.");
+            }
+        }
+        return pg;
     }
 }

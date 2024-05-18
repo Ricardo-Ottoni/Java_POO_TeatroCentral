@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class Main {
     public static ArrayList<Poltrona> poltronas = new ArrayList<>();
+    public static Evento eventos = new Evento();
 
     public static void main(String[] args) {
 
@@ -47,11 +48,11 @@ public class Main {
             opcao = scanner.nextInt();
             scanner.nextLine();
             if (opcao == 1) {
-                evento.exibeEventos();
+                eventos.exibeEventos();
             } else if (opcao == 2) {
-                evento.addEvento();
+                eventos.addEvento();
             } else if (opcao == 3) {
-                evento.deletaEvento();
+                eventos.deletaEvento();
             } else if (opcao == 4) {
                 cliente.cadastroCliente();
             } else if (opcao == 5) {
@@ -105,6 +106,37 @@ public class Main {
             } else if (numeroPoltrona >= 1625 && numeroPoltrona <= 1755) {
                 System.out.println("Ok, poltrona disponível na Galeria");
                 return new Poltrona(numeroPoltrona);
+            } else {
+                System.out.println("Opção inválida, tente novamente.");
+            }
+        }
+    }
+
+    public static void formaPagamento() {
+        Scanner scanner = new Scanner(System.in);
+
+        int pg = 0;
+        while (pg != 4) {
+            System.out.println("--------Menu Pagamento--------");
+            System.out.println(" Escolha a forma de pagamento:");
+            System.out.println(" 1. Dinheiro -----------------");
+            System.out.println(" 2. PIX ----------------------");
+            System.out.println(" 3. Debito -------------------");
+            System.out.println(" 4. Credito ------------------");
+            System.out.println("------------------------------");
+
+            pg = scanner.nextInt();
+            scanner.nextLine();
+            if (pg == -1) {
+                System.out.println("Saindo do menu pagamento...");
+            } else if (pg == 1) {
+                System.out.println("Forma de pagamento: Dinheiro");
+            } else if (pg == 2) {
+                System.out.println("Forma de pagamento: PIX");
+            } else if (pg == 3) {
+                System.out.println("Forma de pagamento: Debito");
+            } else if (pg == 4) {
+                System.out.println("Forma de pagamento: Credito");
             } else {
                 System.out.println("Opção inválida, tente novamente.");
             }
