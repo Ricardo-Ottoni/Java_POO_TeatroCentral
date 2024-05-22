@@ -6,6 +6,7 @@ import src.ingressos.Fila;
 import src.ingressos.Reserva;
 import src.ingressos.Ingresso;
 import src.teatro.Poltrona;
+import src.teatro.Teatro;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,6 +16,8 @@ public class Main {
     public static Evento eventos = new Evento();
 
     public static void main(String[] args) {
+
+        Teatro teatro = new Teatro();
 
         Scanner scanner = new Scanner(System.in);
         Cliente cliente = new Cliente();
@@ -110,6 +113,24 @@ public class Main {
                 System.out.println("Opção inválida, tente novamente.");
             }
         }
+    }
+//        cadastrarEvento(teatro);
+    public static void cadastrarEvento(Teatro teatro) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Informe o nome do evento:");
+        String nome = scanner.nextLine();
+        System.out.println("Informe a data do evento (DD-MM-AAAA:");
+        String data = scanner.nextLine();
+        System.out.println("Informe o horário do evento:");
+        String horario = scanner.nextLine();
+        System.out.println("Informe a descrição do evento:");
+        String descricao = scanner.nextLine();
+        System.out.println("Informe o preço do ingresso:");
+        double precoIngresso = scanner.nextDouble();
+        System.out.println("Evento adicionado!");
+
+        Evento novoEvento = new Evento(nome, data, horario, descricao, precoIngresso);
+        teatro.getEventos().add(novoEvento);
     }
 
     public static void formaPagamento() {
