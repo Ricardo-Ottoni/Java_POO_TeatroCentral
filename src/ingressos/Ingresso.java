@@ -136,36 +136,4 @@ public class Ingresso {
     public void addIngressos(Ingresso ingresso) {
         this.ingressos.add(ingresso);
     }
-
-    public int formaPagamento() {
-        Scanner scanner = new Scanner(System.in);
-
-        int pg = 0;
-        while (pg != 4) {
-            System.out.println("--------Menu Pagamento--------");
-            System.out.println(" Escolha a forma de pagamento:");
-            System.out.println(" 1. Dinheiro -----------------");
-            System.out.println(" 2. PIX ----------------------");
-            System.out.println(" 3. Debito -------------------");
-            System.out.println(" 4. Credito ------------------");
-            System.out.println("------------------------------");
-
-            pg = scanner.nextInt();
-            scanner.nextLine();
-            if (pg == -1) {
-                System.out.println("Saindo do menu pagamento...");
-            } else if (pg == 1) {
-                System.out.println("Forma de pagamento: Dinheiro");
-            } else if (pg == 2) {
-                System.out.println("Forma de pagamento: PIX");
-            } else if (pg == 3) {
-                System.out.println("Forma de pagamento: Debito");
-            } else if (pg == 4) {
-                System.out.println("Forma de pagamento: Credito");
-            } else {
-                System.out.println("Opção inválida, tente novamente.");
-            }
-        }
-        return pg;
-    }
 }
